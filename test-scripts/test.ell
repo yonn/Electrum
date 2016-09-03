@@ -1,0 +1,29 @@
+(fn keyboard->leopard (in-file out-file)
+  (with in (open in-file :read) (with out (open out-file :write)
+    (let ((buffer (read-file in))
+          (new-buffer (replace-all buffer "keyboard" "leopard")))
+      (fprintf out "~s" new-buffer)))))
+
+#|
+(async count-reports-from-db (db)
+  (let ((total-count 0) (true-count 0) (false-count 0) (data (get-json db)))
+    (foreach user (get-children data)
+      (foreach category (get-children user)
+	(foreach report (get-children category)
+          (inc total-counts)
+	  (if (value report)
+	    (inc true-count)
+	    (inc false-count)))))
+    (list total-count true-count false-count)))
+
+(let ((reports (await (count-reports-from-db))))
+  (printf "There were ~a reports made, ~a% where true." (nth reports 0) (/ (nth reports 1) (nth reports 0))))
+
+;-------------------
+(fn main ()
+  "Implementation of unix `echo' command"
+  (foreach arg (*system-argv*)
+    (printf "~a " arg))
+  (printf "~%"))
+;--------------------
+|#
