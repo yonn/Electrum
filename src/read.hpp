@@ -5,6 +5,7 @@
 #include <fstream>
 
 #include "lexer.hpp"
+#include "object.hpp"
 #include "error.hpp"
 
 namespace electrum {
