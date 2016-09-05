@@ -8,7 +8,7 @@
 #include "object.hpp"
 #include "error.hpp"
 
-namespace electrum {
+namespace ell {
 
 	TokenList read_file(const std::string& filename);
 	

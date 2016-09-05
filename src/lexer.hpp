@@ -11,7 +11,7 @@
 
 //#include "error.hpp"
 
-namespace electrum {
+namespace ell {
 
 	class TokenIR {
 	public:

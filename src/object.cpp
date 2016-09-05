@@ -1,6 +1,6 @@
 #include "object.hpp"
 
-namespace electrum {
+namespace ell {
 
 	bool is_empty(Pair* p)
 	{

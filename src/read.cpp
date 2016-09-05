@@ -1,6 +1,6 @@
 #include "read.hpp"
 
-namespace electrum {
+namespace ell {
 
 	TokenList read_file(const std::string& filename)
 	{

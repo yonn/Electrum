@@ -5,8 +5,13 @@
 
 #include "objects/base_object.hpp"
 #include "objects/pair.hpp"
+#include "objects/string.hpp"
+#include "objects/integer.hpp"
+#include "objects/float.hpp"
 
-namespace electrum {
+#define ELL_FORLIST(v, l) for(Pair* v = l; v != nullptr; v = (Pair*)v->cdr)
+
+namespace ell {
 
 
 	bool is_empty(Pair* p);

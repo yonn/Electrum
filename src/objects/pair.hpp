@@ -6,7 +6,7 @@
 
 #include "base_object.hpp"
 
-namespace electrum {
+namespace ell {
 
 	class Pair: public Object {
 	public:

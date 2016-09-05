@@ -1,6 +1,6 @@
 #include "error.hpp"
 
-namespace electrum {
+namespace ell {
 	
 	std::string error_filename;
 	std::map<size_t, std::string> lines;

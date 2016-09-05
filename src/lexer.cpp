@@ -1,6 +1,6 @@
 #include "lexer.hpp"
 
-namespace electrum {
+namespace ell {
 
 	static bool comment = false;
 	static bool separator = false;

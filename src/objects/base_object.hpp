@@ -4,7 +4,7 @@
 #include <string>
 #include <sstream>
 
-namespace electrum {
+namespace ell {
 
 	template<typename O, typename ... Args>
 	O* make(Args ... args)

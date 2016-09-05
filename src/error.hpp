@@ -7,7 +7,7 @@
 #include <cstdarg>
 #include <map>
 
-namespace electrum {
+namespace ell {
 	
 	extern std::map<size_t, std::string> lines;
 

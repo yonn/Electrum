@@ -9,10 +9,9 @@ OBJS = bin/electrum.o \
        bin/lexer.o \
        bin/error.o
 
-OBJ_CLASSES = src/objects/base_object.hpp \
-              src/objects/pair.hpp
+OBJ_CLASSES = src/objects/*.hpp
 
-debug_electrum: src/main.cpp $(OBJS)
+electrum: src/main.cpp $(OBJS)
 	$(CC) $(D_LFLAGS) src/main.cpp $(OBJS) -o bin/electrum
 
 bin/electrum.o: src/electrum.cpp src/electrum.hpp src/read.hpp src/error.hpp
