@@ -11,6 +11,8 @@
 namespace ell {
 
 	TokenList read_file(const std::string& filename);
+	Object* read_one(TokenList& tokens);
+	Object* read(const std::string& line);
 	
 }
 

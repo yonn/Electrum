@@ -6,6 +6,8 @@
 
 #include "base_object.hpp"
 
+#define ELL_NEW_NIL (make<Pair>(nullptr, nullptr, true))
+
 namespace ell {
 
 	class Pair: public Object {

@@ -28,6 +28,8 @@ namespace ell {
 			s << "Object[" << (void*)this << "]";
 			return s.str();
 		}
+
+		size_t line_number;
 		
 	};
 

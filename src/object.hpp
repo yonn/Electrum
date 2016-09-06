@@ -8,6 +8,8 @@
 #include "objects/string.hpp"
 #include "objects/integer.hpp"
 #include "objects/float.hpp"
+#include "objects/keyword.hpp"
+#include "objects/symbol.hpp"
 
 #define ELL_FORLIST(v, l) for(Pair* v = l; v != nullptr; v = (Pair*)v->cdr)
 
