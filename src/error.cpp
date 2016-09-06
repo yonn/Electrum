@@ -4,11 +4,13 @@ namespace ell {
 	
 	std::string error_filename;
 	std::map<size_t, std::string> lines;
+	ErrorMode mode;
 
 
-	void init_error(const std::string& filename)
+	void init_error(const std::string& filename, ErrorMode m)
 	{
 		error_filename = filename;
+		mode = m;
 	}
 	
 	void error(std::string fmt, ...)
@@ -23,7 +25,11 @@ namespace ell {
 
 		va_end(args);
 
-		exit(1);
+		if (mode == ErrorMode::REPL) {
+			throw ErrorException();
+		} else {
+			exit(1);
+		}
 	}
 	
 	void error(size_t line_number, std::string fmt, ...)
@@ -36,8 +42,12 @@ namespace ell {
 		std::fprintf(stderr, "\n\t%s\n\n", lines[line_number].c_str());
 
 		va_end(args);
-
-		exit(1);
+		
+		if (mode == ErrorMode::REPL) {
+			throw ErrorException();
+		} else {
+			exit(1);
+		}
 	}
 	
 }

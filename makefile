@@ -4,6 +4,7 @@ D_CFLAGS = -Wall -Wextra -std=c++14 -c $(DEBUG)
 D_LFLAGS = -Wall -Wextra -std=c++14 $(DEBUG)
 
 OBJS = bin/electrum.o \
+       bin/eval.o \
        bin/read.o \
        bin/object.o \
        bin/lexer.o \
@@ -17,7 +18,10 @@ electrum: src/main.cpp $(OBJS)
 bin/electrum.o: src/electrum.cpp src/electrum.hpp src/read.hpp src/error.hpp
 	$(CC) $(D_CFLAGS) src/electrum.cpp -o bin/electrum.o
 
-bin/read.o: src/read.cpp src/read.hpp src/lexer.hpp src/error.hpp
+bin/eval.o: src/eval.cpp src/eval.hpp src/object.hpp src/error.hpp
+	$(CC) $(D_CFLAGS) src/eval.cpp -o bin/eval.o
+
+bin/read.o: src/read.cpp src/read.hpp src/object.hpp src/lexer.hpp src/error.hpp
 	$(CC) $(D_CFLAGS) src/read.cpp -o bin/read.o
 
 bin/object.o: src/object.cpp src/object.hpp $(OBJ_CLASSES)

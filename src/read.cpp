@@ -12,8 +12,6 @@ namespace ell {
 		std::ifstream in(filename);
 		if (in) {
 
-			init_error(filename);
-
 			while (std::getline(in, line)) {
 				if (line.find("#|") != std::string::npos) {
 					comment = true;
