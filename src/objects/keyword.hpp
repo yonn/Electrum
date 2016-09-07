@@ -1,5 +1,6 @@
 #ifndef ELECTRUM_KEYWORD_HPP
 #define ELECTRUM_KEYWORD_HPP
+
 #include "base_object.hpp"
 
 #include <string>

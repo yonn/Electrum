@@ -2,6 +2,14 @@
 
 namespace ell {
 
+	const std::string Object::TYPE = ELL_CORE_TYPE(Object);
+	const std::string Integer::TYPE = ELL_CORE_TYPE(Object);
+	const std::string Float::TYPE = ELL_CORE_TYPE(Object);
+	const std::string String::TYPE = ELL_CORE_TYPE(Object);
+	const std::string Symbol::TYPE = ELL_CORE_TYPE(Object);
+	const std::string Pair::TYPE = ELL_CORE_TYPE(Object);
+	const std::string Keyword::TYPE = ELL_CORE_TYPE(Object);
+
 	bool is_empty(Pair* p)
 	{
 		return (not p->car and not p->cdr);
