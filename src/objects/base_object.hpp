@@ -4,6 +4,8 @@
 #include <string>
 #include <sstream>
 
+#define ELL_CORE_TYPE(t) ("ell.core." + std::string(#t))
+
 namespace ell {
 
 	template<typename O, typename ... Args>
@@ -19,6 +21,7 @@ namespace ell {
 
 		virtual Object* init()
 		{
+			this->type = Object::TYPE;
 			return this;
 		}
 
@@ -30,6 +33,9 @@ namespace ell {
 		}
 
 		size_t line_number;
+		std::string type;
+
+		static const std::string TYPE;
 		
 	};
 

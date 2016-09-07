@@ -12,6 +12,7 @@ namespace ell {
 
 		virtual Object* init(std::string symbol)
 		{
+			this->type = Symbol::TYPE;
 			this->symbol = symbol;
 			return this;
 		}
@@ -22,7 +23,9 @@ namespace ell {
 		}
 
 		std::string symbol;
-		
+
+		static const std::string TYPE;
+
 	};
 
 }

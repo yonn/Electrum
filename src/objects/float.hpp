@@ -13,6 +13,7 @@ namespace ell {
 
 		virtual Object* init(long double value)
 		{
+			this->type = TYPE;
 			this->value = value;
 			return this;
 		}
@@ -25,6 +26,8 @@ namespace ell {
 		}
 		
 		long double value;
+
+		static const std::string TYPE;
 		
 	};
 

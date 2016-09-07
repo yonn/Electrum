@@ -15,6 +15,7 @@ namespace ell {
 
 		virtual Object* init(Object* car, Object* cdr, bool head = false)
 		{
+			this->type = Pair::TYPE;
 			this->car = car;
 			this->cdr = cdr;
 			this->head = head;
@@ -49,6 +50,9 @@ namespace ell {
 		Object* car;
 		Object* cdr;
 		bool head;
+
+		static const std::string TYPE;
+
 	};
 
 }
