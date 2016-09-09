@@ -11,8 +11,6 @@
 #include "objects/keyword.hpp"
 #include "objects/symbol.hpp"
 
-#define ELL_FORLIST(v, l) for(Pair* v = l; v != nullptr; v = (Pair*)v->cdr)
-
 namespace ell {
 
 
@@ -21,6 +19,7 @@ namespace ell {
 
 	void push_back(Pair* p, Object* o);
 	Object* pop_back(Pair* p);
+	Object* nd_pop_front(Pair*& p);
 
 }
 

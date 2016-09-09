@@ -6,7 +6,8 @@
 
 #include "base_object.hpp"
 
-#define ELL_NEW_NIL (make<Pair>(nullptr, nullptr, true))
+#define ELL_FORLIST(v, l) for(ell::Pair* v = l; v != nullptr; v = (ell::Pair*)v->cdr)
+#define ELL_NEW_NIL (ell::make<ell::Pair>(nullptr, nullptr, true))
 
 namespace ell {
 
@@ -45,6 +46,14 @@ namespace ell {
 			}
 			
 			return s.str();
+		}
+
+		void clean_head()
+		{
+			this->head = true;
+			ELL_FORLIST(p, (Pair*)this->cdr) {
+				p->head = false;
+			}
 		}
 		
 		Object* car;

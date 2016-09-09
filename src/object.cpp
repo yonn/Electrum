@@ -37,7 +37,7 @@ namespace ell {
 	Object* pop_back(Pair* p)
 	{
 		if (is_empty(p)) {
-			error("Attempted to pop_back on an empty list."); //TODO upgrade error
+			error(p->line_number, "Attempted to pop_back on an empty list.");
 		}
 
 		Pair* node = p;
@@ -47,6 +47,24 @@ namespace ell {
 		prev->cdr = nullptr;
 		Object* res = node->car;
 		node->init(nullptr, nullptr);
+		return res;
+	}
+
+	Object* nd_pop_front(Pair*& p)
+	{
+		if (is_empty(p)) {
+			error(p->line_number, "Attempted to pop_front on an empty list.");
+		}
+
+		Object* res = p->car;
+		if (p->cdr) {
+			p = (Pair*)p->cdr;
+		} else {
+			p = ELL_NEW_NIL;
+		}
+		if (p) {
+			p->head = true;
+		}
 		return res;
 	}
 	
