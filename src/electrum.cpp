@@ -27,7 +27,7 @@ namespace ell {
 				}
 				
 				Object* o = read(buffer + '\n');
-				//if (o) o = eval(o);
+				if (o) o = eval(o);
 				if (o) std::cout << "Out [" << index << "]: " << o->repr() << std::endl << std::endl;
 				
 				//gc();
