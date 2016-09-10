@@ -2,6 +2,7 @@
 #define ELECTRUM_EVAL_HPP
 
 #include "object.hpp"
+#include "builtins.hpp"
 #include "error.hpp"
 
 namespace ell {
