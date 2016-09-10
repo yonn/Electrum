@@ -13,7 +13,7 @@ namespace ell {
 
 		virtual Object* init(long double value)
 		{
-			this->type = TYPE;
+			this->type = Float::TYPE;
 			this->value = value;
 			return this;
 		}

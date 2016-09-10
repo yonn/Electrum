@@ -12,7 +12,7 @@ namespace ell {
 
 		virtual Object* init(long value)
 		{
-			this->type = TYPE;
+			this->type = Integer::TYPE;
 			this->value = value;
 			return this;
 		}

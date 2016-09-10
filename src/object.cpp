@@ -3,12 +3,12 @@
 namespace ell {
 
 	const std::string Object::TYPE = ELL_CORE_TYPE(Object);
-	const std::string Integer::TYPE = ELL_CORE_TYPE(Object);
-	const std::string Float::TYPE = ELL_CORE_TYPE(Object);
-	const std::string String::TYPE = ELL_CORE_TYPE(Object);
-	const std::string Symbol::TYPE = ELL_CORE_TYPE(Object);
-	const std::string Pair::TYPE = ELL_CORE_TYPE(Object);
-	const std::string Keyword::TYPE = ELL_CORE_TYPE(Object);
+	const std::string Integer::TYPE = ELL_CORE_TYPE(Integer);
+	const std::string Float::TYPE = ELL_CORE_TYPE(Float);
+	const std::string String::TYPE = ELL_CORE_TYPE(String);
+	const std::string Symbol::TYPE = ELL_CORE_TYPE(Symbol);
+	const std::string Pair::TYPE = ELL_CORE_TYPE(Pair);
+	const std::string Keyword::TYPE = ELL_CORE_TYPE(Keyword);
 
 	bool is_empty(Pair* p)
 	{
