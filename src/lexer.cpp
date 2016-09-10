@@ -4,6 +4,7 @@ namespace ell {
 
 	static bool comment = false;
 	static bool separator = false;
+	static bool str = false;
 
 	static bool is_token(const std::string& token);
 
@@ -63,6 +64,12 @@ namespace ell {
 				buf += c;
 			}
 		}
+
+		if (str) {
+			error(line_num, "Incomplete string!");
+			return TokenList();
+		}
+		
 		if (buf != "") {
 			tokens.push_back(buf);
 		}
@@ -160,12 +167,16 @@ namespace ell {
 		if (token[0] == '"') {
 			if (token.size() > 2 and token[token.size() - 2] == '"') {
 				if (token.size() > 2 and token[token.size() - 2] == ';') {
+					str = true;
 					return true;
 				}
+				str = false;
 				return false;
 			}
+			str = true;
 			return true;
 		}
+		str = false;
 		return false;
 	}
 

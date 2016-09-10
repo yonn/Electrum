@@ -9,7 +9,7 @@
 #include <set>
 #include <algorithm>
 
-//#include "error.hpp"
+#include "error.hpp"
 
 namespace ell {
 
