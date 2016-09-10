@@ -22,6 +22,7 @@ namespace ell {
 			String,
 			DecimalNum,
 			FloatNum,
+			Quote,
 			Separator
 		} tid;
 

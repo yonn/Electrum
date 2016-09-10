@@ -137,6 +137,8 @@ namespace ell {
 			o = make<Keyword>(next.token);
 		} else if (next.tid == TokenIR::Type::Symbol) {
 			o = make<Symbol>(next.token);
+		} else if (next.tid == TokenIR::Type::Quote) {
+			o = make<Quote>(read_impl(fetch()));
 		} else {
 			error(next.line_number, "Token `%s' could not be read!", next.token.c_str());
 			return nullptr;

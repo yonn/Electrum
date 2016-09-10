@@ -9,6 +9,8 @@ namespace ell {
 	{
 		if (o->type == Pair::TYPE) {
 			return eval_list((Pair*)o);
+		} else if (o->type == Quote::TYPE) {
+			return ((Quote*)o)->o;
 		} else {
 			return o;
 		}

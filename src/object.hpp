@@ -10,6 +10,7 @@
 #include "objects/float.hpp"
 #include "objects/keyword.hpp"
 #include "objects/symbol.hpp"
+#include "objects/quote.hpp"
 
 namespace ell {
 

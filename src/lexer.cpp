@@ -17,7 +17,7 @@ namespace ell {
 	static bool is_string_token(const std::string& token);
 	static bool is_comment_token(const std::string& token);
 
-	static std::set<char> separators = { '(', ')', '[', ']', '{', '}' }; 
+	static std::set<char> separators = { '(', ')', '[', ']', '{', '}', '\'' }; 
 
 	const std::string TokenIR::str() const
 	{
@@ -26,6 +26,7 @@ namespace ell {
 							             "String",
 							             "DecNum",
 							             "FloatNum",
+								     "Quote",
 							             "Separator" };
 
 		std::ostringstream s;
@@ -103,6 +104,8 @@ namespace ell {
 			} else {
 				res.tid = TokenIR::Type::DecimalNum;
 			}
+		} else if (token == "'") {
+			res.tid = TokenIR::Type::Quote;
 		} else if (separators.count(token[0]) == 1) {
 			res.tid = TokenIR::Type::Separator;
 		} else {
