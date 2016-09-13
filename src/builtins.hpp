@@ -23,6 +23,13 @@ namespace ell {
 	 *----------------------------------------------------------*/
 
 	Object* type(Pair* args);
+
+	/*------------------------------------------------------------
+	 *  Arithmetic
+	 *----------------------------------------------------------*/
+
+	Object* add(Pair* args);
+	Object* multiply(Pair* args);
 }
 
 #endif /*ELECTRUM_BUILTINS_HPP*/

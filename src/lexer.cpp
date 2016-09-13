@@ -146,8 +146,11 @@ namespace ell {
 	bool is_number_token(const std::string& token)
 	{
 		bool period = false;
+		bool neg = false;
 
-		for (size_t i = 0; i < token.size(); i++) {
+		if (token[0] == '-') neg = true;
+
+		for (size_t i = ((neg)? 1 : 0); i < token.size(); i++) {
 			auto c = token[i];
 
 			if (c == '.' and not period) {
