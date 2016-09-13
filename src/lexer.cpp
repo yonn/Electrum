@@ -160,6 +160,8 @@ namespace ell {
 				return false;
 			}
 		}
+
+		if (token == "-") return false;
 		return true;
 	}
 

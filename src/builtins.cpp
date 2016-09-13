@@ -4,7 +4,9 @@ namespace ell {
 
 	std::map<std::string, BuiltinFunction> builtin_functions = { { "type", &type },
 	                                                             { "+", &add },
-	                                                             { "*", &multiply } };
+	                                                             { "*", &multiply },
+	                                                             { "-", &subtract },
+	                                                             { "/", &divide } };
 
 	/*------------------------------------------------------------
 	 *  Builtin Functions
@@ -97,4 +99,90 @@ namespace ell {
 		}
 	}
 
+	Object* subtract(Pair* args)
+	{
+		if (is_empty(args)) {
+			return nd_pop_front(args);
+		}
+		if (check_numeric("-", args)) {
+			auto res = make<Float>(0.0);
+			Object* o = nd_pop_front(args);
+			if (o->type == Float::TYPE) {
+				res->value += ((Float*)o)->value;
+			} else {
+				res->value += ((Integer*)o)->value;
+			}
+
+			if (is_empty(args)) {
+				res->value = -res->value;
+				return res;
+			}
+			
+			o = nd_pop_front(args);
+			if (o->type == Float::TYPE) {
+				res->value -= ((Float*)o)->value;
+			} else {
+				res->value -= ((Integer*)o)->value;
+			}
+			return res;
+		} else {
+			auto res = make<Integer>(0);
+			Object* o = nd_pop_front(args);
+			if (o->type == Float::TYPE) {
+				res->value += ((Float*)o)->value;
+			} else {
+				res->value += ((Integer*)o)->value;
+			}
+
+			if (is_empty(args)) {
+				res->value = -res->value;
+				return res;
+			}
+			
+			o = nd_pop_front(args);
+			if (o->type == Float::TYPE) {
+				res->value -= ((Float*)o)->value;
+			} else {
+				res->value -= ((Integer*)o)->value;
+			}
+			return res;
+		}
+	}
+
+	Object* divide(Pair* args)
+	{
+		if (is_empty(args)) {
+			return nd_pop_front(args);
+		}
+
+		check_numeric("/", args);
+
+		auto res = make<Float>(1.0);
+		Object* o = nd_pop_front(args);
+		if (o->type == Float::TYPE) {
+			res->value *= ((Float*)o)->value;
+		} else {
+			res->value *= ((Integer*)o)->value;
+		}
+		
+		if (is_empty(args)) {
+			res->value = 1 / res->value;
+			return res;
+		}
+		
+		o = nd_pop_front(args);
+		if (o->type == Float::TYPE) {
+			if (((Float*)o)->value == 0.0) {
+				error(o->line_number, "Divide by zero error!");
+			}
+			res->value /= ((Float*)o)->value;
+		} else {
+			if (((Integer*)o)->value == 0) {
+				error(o->line_number, "Divide by zero error!");
+			}
+			res->value /= ((Integer*)o)->value;
+		}
+		return res;
+	}
+	
 }

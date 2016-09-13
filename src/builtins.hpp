@@ -30,6 +30,8 @@ namespace ell {
 
 	Object* add(Pair* args);
 	Object* multiply(Pair* args);
+	Object* subtract(Pair* args);
+	Object* divide(Pair* args);
 }
 
 #endif /*ELECTRUM_BUILTINS_HPP*/
