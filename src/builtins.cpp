@@ -6,7 +6,9 @@ namespace ell {
 	                                                             { "+", &add },
 	                                                             { "*", &multiply },
 	                                                             { "-", &subtract },
-	                                                             { "/", &divide } };
+	                                                             { "/", &divide },
+	                                                             { "^", &power },
+	                                                             { "sqrt", &sqrt } };
 
 	/*------------------------------------------------------------
 	 *  Builtin Functions
@@ -52,9 +54,9 @@ namespace ell {
 			auto res = make<Float>(0.0);
 			ELL_FORLIST(e, args) {
 				if (e->car->type == Float::TYPE) {
-					res->value += ((Float*)e->car)->value;
+					res->value += ((Float*)eval(e->car))->value;
 				} else {
-					res->value += ((Integer*)e->car)->value;
+					res->value += ((Integer*)eval(e->car))->value;
 				}
 			}
 			return res;
@@ -62,9 +64,9 @@ namespace ell {
 			auto res = make<Integer>(0);
 			ELL_FORLIST(e, args) {
 				if (e->car->type == Float::TYPE) {
-					res->value += ((Float*)e->car)->value;
+					res->value += ((Float*)eval(e->car))->value;
 				} else {
-					res->value += ((Integer*)e->car)->value;
+					res->value += ((Integer*)eval(e->car))->value;
 				}
 			}
 			return res;
@@ -80,9 +82,9 @@ namespace ell {
 			auto res = make<Float>(1.0);
 			ELL_FORLIST(e, args) {
 				if (e->car->type == Float::TYPE) {
-					res->value *= ((Float*)e->car)->value;
+					res->value *= ((Float*)eval(e->car))->value;
 				} else {
-					res->value *= ((Integer*)e->car)->value;
+					res->value *= ((Integer*)eval(e->car))->value;
 				}
 			}
 			return res;
@@ -90,9 +92,9 @@ namespace ell {
 			auto res = make<Integer>(1);
 			ELL_FORLIST(e, args) {
 				if (e->car->type == Float::TYPE) {
-					res->value *= ((Float*)e->car)->value;
+					res->value *= ((Float*)eval(e->car))->value;
 				} else {
-					res->value *= ((Integer*)e->car)->value;
+					res->value *= ((Integer*)eval(e->car))->value;
 				}
 			}
 			return res;
@@ -106,7 +108,9 @@ namespace ell {
 		}
 		if (check_numeric("-", args)) {
 			auto res = make<Float>(0.0);
-			Object* o = nd_pop_front(args);
+
+			Object* o = eval(nd_pop_front(args));
+			
 			if (o->type == Float::TYPE) {
 				res->value += ((Float*)o)->value;
 			} else {
@@ -118,7 +122,7 @@ namespace ell {
 				return res;
 			}
 			
-			o = nd_pop_front(args);
+			o = eval(nd_pop_front(args));
 			if (o->type == Float::TYPE) {
 				res->value -= ((Float*)o)->value;
 			} else {
@@ -127,7 +131,9 @@ namespace ell {
 			return res;
 		} else {
 			auto res = make<Integer>(0);
-			Object* o = nd_pop_front(args);
+
+			Object* o = eval(nd_pop_front(args));
+
 			if (o->type == Float::TYPE) {
 				res->value += ((Float*)o)->value;
 			} else {
@@ -139,7 +145,7 @@ namespace ell {
 				return res;
 			}
 			
-			o = nd_pop_front(args);
+			o = eval(nd_pop_front(args));
 			if (o->type == Float::TYPE) {
 				res->value -= ((Float*)o)->value;
 			} else {
@@ -158,7 +164,9 @@ namespace ell {
 		check_numeric("/", args);
 
 		auto res = make<Float>(1.0);
-		Object* o = nd_pop_front(args);
+
+		Object* o = eval(nd_pop_front(args));
+		
 		if (o->type == Float::TYPE) {
 			res->value *= ((Float*)o)->value;
 		} else {
@@ -170,7 +178,7 @@ namespace ell {
 			return res;
 		}
 		
-		o = nd_pop_front(args);
+		o = eval(nd_pop_front(args));
 		if (o->type == Float::TYPE) {
 			if (((Float*)o)->value == 0.0) {
 				error(o->line_number, "Divide by zero error!");
@@ -183,6 +191,55 @@ namespace ell {
 			res->value /= ((Integer*)o)->value;
 		}
 		return res;
+	}
+
+	Object* power(Pair* args)
+	{
+		if (is_empty(args)) {
+			return nd_pop_front(args);
+		}
+
+		check_numeric("^", args);
+
+		Object* bo = eval(nd_pop_front(args));
+		Object* eo = eval(nd_pop_front(args));
+
+		long double b, e;
+
+		if (bo->type == Float::TYPE) {
+			b = ((Float*)bo)->value;
+		} else {
+			b = ((Integer*)bo)->value;
+		}
+
+		if (eo->type == Float::TYPE) {
+			e = ((Float*)eo)->value;
+		} else {
+			e = ((Integer*)eo)->value;
+		}
+		
+		return make<Float>(std::pow(b, e));
+	}
+
+	Object* sqrt(Pair* args)
+	{
+		if (is_empty(args)) {
+			return nd_pop_front(args);
+		}
+
+		check_numeric("^", args);
+
+		Object* o = eval(nd_pop_front(args));
+
+		long double v;
+
+		if (o->type == Float::TYPE) {
+			v = ((Float*)o)->value;
+		} else {
+			v = ((Integer*)o)->value;
+		}
+		
+		return make<Float>(std::sqrt(v));
 	}
 	
 }

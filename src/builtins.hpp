@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+#include <cmath>
 
 #include "eval.hpp"
 #include "object.hpp"
@@ -32,6 +33,8 @@ namespace ell {
 	Object* multiply(Pair* args);
 	Object* subtract(Pair* args);
 	Object* divide(Pair* args);
+	Object* power(Pair* args);
+	Object* sqrt(Pair* args);
 }
 
 #endif /*ELECTRUM_BUILTINS_HPP*/
