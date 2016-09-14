@@ -66,7 +66,7 @@ namespace ell {
 		}
 
 		if (str) {
-			error(line_num, "Incomplete string!");
+			error("Incomplete string!");
 			return TokenList();
 		}
 		

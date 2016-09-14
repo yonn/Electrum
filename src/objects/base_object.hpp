@@ -32,7 +32,6 @@ namespace ell {
 			return s.str();
 		}
 
-		size_t line_number;
 		std::string type;
 
 		static const std::string TYPE;

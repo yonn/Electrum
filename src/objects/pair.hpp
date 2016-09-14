@@ -60,6 +60,8 @@ namespace ell {
 		Object* cdr;
 		bool head;
 
+		size_t line_number;
+
 		static const std::string TYPE;
 
 	};

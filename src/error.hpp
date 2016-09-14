@@ -11,6 +11,7 @@
 namespace ell {
 	
 	extern std::map<size_t, std::string> lines;
+	extern size_t error_line_number;
 
 	enum class ErrorMode {
 		REPL,
@@ -29,8 +30,8 @@ namespace ell {
 
 	void init_error(const std::string& filename, ErrorMode m);
 	
+	void general_error(std::string fmt, ...);
 	void error(std::string fmt, ...);
-	void error(size_t line_number, std::string fmt, ...);
 	
 }
 

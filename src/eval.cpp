@@ -18,6 +18,7 @@ namespace ell {
 
 	static Object* eval_list(Pair* list)
 	{
+		error_line_number = list->line_number;
 		if (is_empty(list)) {
 			return list;
 		} else {
@@ -35,11 +36,11 @@ namespace ell {
 				auto f = builtin_functions[name];
 				return f(args);
 			} else {
-				error(f->line_number, "Could not find a function `%s'", name.c_str());
+				error("Could not find a function `%s'", name.c_str());
 				return nullptr;
 			}
 		}
-		error(f->line_number, "Can not call object of type `%s' as a function", f->type.c_str());
+		error("Can not call object of type `%s' as a function", f->type.c_str());
 		return nullptr;
 	}
 

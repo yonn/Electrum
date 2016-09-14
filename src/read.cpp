@@ -36,10 +36,11 @@ namespace ell {
 				flag = true;
 			}
 		} else {
-			error("Could not open file: %s", filename.c_str());
+			general_error("Could not open file: %s", filename.c_str());
 		}
 		
 		for (const auto& l: lines) {
+			error_line_number = l.first;
 			auto ts = tokenize(l.second, l.first);
 			for (auto& t: ts) {
 				tokens.push_back(t);
@@ -94,8 +95,8 @@ namespace ell {
 
 	static Object* read_impl(const TokenIR& next)
 	{
+		error_line_number = next.line_number;
 		if (next.token == "(") {
-			return_token(next);
 			return read_list();
 		} else {
 			return read_atom(next);
@@ -105,7 +106,7 @@ namespace ell {
 	static Object* read_list()
 	{
 		Pair* list = ELL_NEW_NIL;
-		list->line_number = fetch().line_number;
+		list->line_number = error_line_number;
 		while (not finished) {
 			auto token = fetch();
 			if (token.token == ")") {
@@ -114,7 +115,7 @@ namespace ell {
 				push_back(list, read_impl(token));
 			}
 		}
-		error(list->line_number, "Incomplete list!");
+		error("Incomplete list!");
 		return nullptr;
 	}
 
@@ -140,10 +141,9 @@ namespace ell {
 		} else if (next.tid == TokenIR::Type::Quote) {
 			o = make<Quote>(read_impl(fetch()));
 		} else {
-			error(next.line_number, "Token `%s' could not be read!", next.token.c_str());
+			error("Token `%s' could not be read!", next.token.c_str());
 			return nullptr;
 		}
-		o->line_number = next.line_number;
 		return o;
 	}
 	

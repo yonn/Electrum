@@ -38,7 +38,7 @@ namespace ell {
 	Object* pop_back(Pair* p)
 	{
 		if (is_empty(p)) {
-			error(p->line_number, "Attempted to pop_back on an empty list.");
+			error("Attempted to pop_back on an empty list.");
 		}
 
 		Pair* node = p;
@@ -54,7 +54,7 @@ namespace ell {
 	Object* nd_pop_front(Pair*& p)
 	{
 		if (is_empty(p)) {
-			error(p->line_number, "Attempted to pop_front on an empty list.");
+			error("Attempted to pop_front on an empty list.");
 		}
 
 		Object* res = p->car;

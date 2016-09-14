@@ -15,7 +15,7 @@ namespace ell {
 		if (O::TYPE == Object::TYPE) {
 			return (O*)o;
 		} else if (o->type != O::TYPE) {
-			error(o->line_number, "Expected `%s', received `%s'", o->type.c_str(), O::TYPE.c_str());
+			error("Expected `%s', received `%s'", o->type.c_str(), O::TYPE.c_str());
 			return nullptr;
 		} else {
 			return (O*)o;

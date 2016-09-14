@@ -48,7 +48,7 @@ namespace ell {
 			if (eval(e->car)->type == Float::TYPE) {
 				f = true;
 			} else if (eval(e->car)->type != Integer::TYPE) {
-				error(e->car->line_number, "`%s' recieved a `%s', expected a numeric type.",
+				error("`%s' recieved a `%s', expected a numeric type.",
 				      name.c_str(),
 				      e->car->type.c_str());
 			}
@@ -188,6 +188,11 @@ namespace ell {
 		}
 		
 		if (is_empty(args)) {
+
+			if (res->value == 0.0) {
+				goto divide_by_zero_error;
+			}
+			
 			res->value = 1 / res->value;
 			return res;
 		}
@@ -197,14 +202,15 @@ namespace ell {
 		if (o->type == Float::TYPE) {
 
 			if (((Float*)o)->value == 0.0) {
-				error(o->line_number, "Divide by zero error!");
+			divide_by_zero_error:
+				error("Divide by zero error!");
 			}
 			
 			res->value /= ((Float*)o)->value;
 		} else {
 
 			if (((Integer*)o)->value == 0) {
-				error(o->line_number, "Divide by zero error!");
+				error("Divide by zero error!");
 			}
 			
 			res->value /= ((Integer*)o)->value;
@@ -252,7 +258,7 @@ namespace ell {
 		}
 
 		if (v < 0.0) {
-			error(res->line_number, "Negative square root error");
+			error("Negative square root error");
 		}
 
 		return res->init(std::sqrt(v));
@@ -325,7 +331,7 @@ namespace ell {
 		}
 
 		if (v > 1.0 or v < -1.0) {
-			error(args->line_number, "Argument must be between -1 and 1");
+			error("Argument must be between -1 and 1");
 		}
 
 		return res->init(std::asin(v));
@@ -346,7 +352,7 @@ namespace ell {
 		}
 
 		if (v > 1.0 or v < -1.0) {
-			error(args->line_number, "Argument must be between -1 and 1");
+			error("Argument must be between -1 and 1");
 		}
 
 		return res->init(std::acos(v));
@@ -367,7 +373,7 @@ namespace ell {
 		}
 
 		if (v > 1.0 or v < -1.0) {
-			error(args->line_number, "Argument must be between -1 and 1");
+			error("Argument must be between -1 and 1");
 		}
 
 		return res->init(std::atan(v));
