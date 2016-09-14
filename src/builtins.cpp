@@ -8,7 +8,13 @@ namespace ell {
 	                                                             { "-", &subtract },
 	                                                             { "/", &divide },
 	                                                             { "^", &power },
-	                                                             { "sqrt", &sqrt } };
+	                                                             { "sqrt", &sqrt },
+	                                                             { "sin", &sin },
+	                                                             { "cos", &cos },
+	                                                             { "tan", &tan },
+	                                                             { "asin", &asin },
+	                                                             { "acos", &acos },
+	                                                             { "atan", &atan } };
 
 	/*------------------------------------------------------------
 	 *  Builtin Functions
@@ -250,6 +256,121 @@ namespace ell {
 		}
 
 		return res->init(std::sqrt(v));
+	}
+
+	Object* sin(Pair* args)
+	{
+		check_numeric("sin", args);
+
+		auto res = make<Float>(0.0);
+		long double v;
+
+		Object* o = get_arg<Object>(args);
+		if (o->type == Float::TYPE) {
+			v = ((Float*)o)->value;
+		} else {
+			v = ((Integer*)o)->value;
+		}
+
+		return res->init(std::sin(v));
+	}
+
+	Object* cos(Pair* args)
+	{
+		check_numeric("cos", args);
+
+		auto res = make<Float>(0.0);
+		long double v;
+
+		Object* o = get_arg<Object>(args);
+		if (o->type == Float::TYPE) {
+			v = ((Float*)o)->value;
+		} else {
+			v = ((Integer*)o)->value;
+		}
+
+		return res->init(std::cos(v));
+	}
+
+	Object* tan(Pair* args)
+	{
+		check_numeric("tan", args);
+
+		auto res = make<Float>(0.0);
+		long double v;
+
+		Object* o = get_arg<Object>(args);
+		if (o->type == Float::TYPE) {
+			v = ((Float*)o)->value;
+		} else {
+			v = ((Integer*)o)->value;
+		}
+
+		return res->init(std::tan(v));
+	}
+
+
+	Object* asin(Pair* args)
+	{
+		check_numeric("asin", args);
+
+		auto res = make<Float>(0.0);
+		long double v;
+
+		Object* o = get_arg<Object>(args);
+		if (o->type == Float::TYPE) {
+			v = ((Float*)o)->value;
+		} else {
+			v = ((Integer*)o)->value;
+		}
+
+		if (v > 1.0 or v < -1.0) {
+			error(args->line_number, "Argument must be between -1 and 1");
+		}
+
+		return res->init(std::asin(v));
+	}
+
+	Object* acos(Pair* args)
+	{
+		check_numeric("acos", args);
+
+		auto res = make<Float>(0.0);
+		long double v;
+
+		Object* o = get_arg<Object>(args);
+		if (o->type == Float::TYPE) {
+			v = ((Float*)o)->value;
+		} else {
+			v = ((Integer*)o)->value;
+		}
+
+		if (v > 1.0 or v < -1.0) {
+			error(args->line_number, "Argument must be between -1 and 1");
+		}
+
+		return res->init(std::acos(v));
+	}
+
+	Object* atan(Pair* args)
+	{
+		check_numeric("atan", args);
+
+		auto res = make<Float>(0.0);
+		long double v;
+
+		Object* o = get_arg<Object>(args);
+		if (o->type == Float::TYPE) {
+			v = ((Float*)o)->value;
+		} else {
+			v = ((Integer*)o)->value;
+		}
+
+		if (v > 1.0 or v < -1.0) {
+			error(args->line_number, "Argument must be between -1 and 1");
+		}
+
+		return res->init(std::atan(v));
 	}
 	
 }

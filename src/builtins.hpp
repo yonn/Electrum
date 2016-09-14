@@ -35,6 +35,13 @@ namespace ell {
 	Object* divide(Pair* args);
 	Object* power(Pair* args);
 	Object* sqrt(Pair* args);
+	Object* sin(Pair* args);
+	Object* cos(Pair* args);
+	Object* tan(Pair* args);
+	Object* asin(Pair* args);
+	Object* acos(Pair* args);
+	Object* atan(Pair* args);
+	
 }
 
 #endif /*ELECTRUM_BUILTINS_HPP*/
