@@ -171,7 +171,7 @@ namespace ell {
 	{
 		if (token[0] == '"') {
 			if (token.size() > 2 and token[token.size() - 2] == '"') {
-				if (token.size() > 2 and token[token.size() - 2] == ';') {
+				if (token.size() > 3 and token[token.size() - 3] == '\\') {
 					str = true;
 					return true;
 				}

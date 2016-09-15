@@ -131,6 +131,9 @@ namespace ell {
 		} else if (next.tid == TokenIR::Type::String) {
 			std::string res;
 			for (size_t i = 1; i < next.token.length() - 1; i++) {
+				if (next.token[i] == '\\' and next.token[i + 1] == '"') {
+					continue;
+				}
 				res += next.token[i];
 			}
 			o = make<String>(res);
