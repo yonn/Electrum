@@ -4,6 +4,8 @@
 #include <map>
 #include <string>
 #include <cmath>
+#include <iostream>
+#include <sstream>
 
 #include "eval.hpp"
 #include "object.hpp"
@@ -24,6 +26,11 @@ namespace ell {
 	 *----------------------------------------------------------*/
 
 	Object* type(Pair* args);
+
+	/*------------------------------------------------------------
+	 *  Type conversions
+	 *----------------------------------------------------------*/
+
 	Object* str(Pair* args);
 
 	/*------------------------------------------------------------
@@ -42,6 +49,14 @@ namespace ell {
 	Object* asin(Pair* args);
 	Object* acos(Pair* args);
 	Object* atan(Pair* args);
+
+	/*------------------------------------------------------------
+	 *  IO
+	 *----------------------------------------------------------*/
+	
+	Object* printf(Pair* args);
+	Object* printfln(Pair* args);
+	Object* format(Pair* args);
 	
 }
 

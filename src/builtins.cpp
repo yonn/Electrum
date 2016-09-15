@@ -15,7 +15,10 @@ namespace ell {
 	                                                             { "tan", &tan },
 	                                                             { "asin", &asin },
 	                                                             { "acos", &acos },
-	                                                             { "atan", &atan } };
+	                                                             { "atan", &atan },
+								     { "printf", &printf },
+								     { "printfln", &printfln },
+								     { "format", &format } };
 
 	/*------------------------------------------------------------
 	 *  Builtin Functions
@@ -32,6 +35,10 @@ namespace ell {
 		auto o = get_arg<Object>(args);
 		return make<String>(o->type);
 	}
+
+	/*------------------------------------------------------------
+	 *  Type Conversions
+	 *----------------------------------------------------------*/
 
 	Object* str(Pair* args)
 	{
@@ -383,6 +390,63 @@ namespace ell {
 		}
 
 		return res->init(std::atan(v));
+	}
+
+	/*------------------------------------------------------------
+	 *  IO
+	 *----------------------------------------------------------*/
+
+	static std::string format_(Pair* args)
+	{
+		std::ostringstream s;
+		std::string format = get_arg<String>(args)->value;
+		bool flag = false;
+		
+		for (const auto c: format) {
+			if (flag) {
+				flag = false;
+				switch (c) {
+				case '~':
+					s << '~';
+					break;
+				case '%':
+					s << '\n';
+					break;
+				case 's':
+					s << str(nd_pop_front(args));
+					break;
+				case 'r':
+					s << repr(nd_pop_front(args));
+					break;
+				default:
+					error("Could not identify format flag `%c'", c);
+				}
+			} else {
+				if (c == '~') {
+					flag = true;
+				} else {
+					s << c;
+				}
+			}
+		}
+		return s.str();
+	}
+
+	Object* printf(Pair* args)
+	{
+		std::cout << format_(args);
+		return ELL_NEW_NIL;
+	}
+	
+	Object* printfln(Pair* args)
+	{
+		std::cout << format_(args) << std::endl;
+		return ELL_NEW_NIL;
+	}
+
+	Object* format(Pair* args)
+	{
+		return make<String>(format_(args));
 	}
 	
 }
