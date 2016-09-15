@@ -18,6 +18,9 @@ namespace ell {
 	bool is_empty(Pair* p);
 	bool is_not_empty(Pair* p);
 
+	std::string repr(Object* o);
+	std::string str(Object* o);
+
 	void push_back(Pair* p, Object* o);
 	Object* pop_back(Pair* p);
 	Object* nd_pop_front(Pair*& p);

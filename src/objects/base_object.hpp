@@ -32,6 +32,11 @@ namespace ell {
 			return s.str();
 		}
 
+		virtual std::string str()
+		{
+			return this->repr();
+		}
+
 		std::string type;
 
 		static const std::string TYPE;

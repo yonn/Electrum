@@ -21,6 +21,42 @@ namespace ell {
 		return (p->car or p->cdr);
 	}
 
+	std::string repr(Object* o)
+	{
+		if (o->type == Pair::TYPE) {
+			if (is_empty((Pair*)o)) {
+				return "nil";
+			}
+			std::ostringstream s;
+			s << "(";
+			ELL_FORLIST(e, ((Pair*)o)) {
+				s << repr(e->car) << " "; 
+			}
+			s << "\b)";
+			return s.str();
+		} else {
+			return o->repr();
+		}
+	}
+	
+	std::string str(Object* o)
+	{
+		if (o->type == Pair::TYPE) {
+			if (is_empty((Pair*)o)) {
+				return "nil";
+			}
+			std::ostringstream s;
+			s << "(";
+			ELL_FORLIST(e, ((Pair*)o)) {
+				s << str(e->car) << " "; 
+			}
+			s << "\b)";
+			return s.str();
+		} else {
+			return o->str();
+		}
+	}
+
 	void push_back(Pair* p, Object* o)
 	{
 
@@ -62,9 +98,6 @@ namespace ell {
 			p = (Pair*)p->cdr;
 		} else {
 			p = ELL_NEW_NIL;
-		}
-		if (p) {
-			p->head = true;
 		}
 		return res;
 	}

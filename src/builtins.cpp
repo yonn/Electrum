@@ -53,7 +53,6 @@ namespace ell {
 				      e->car->type.c_str());
 			}
 		}
-		args->clean_head();
 		return f;
 	}
 

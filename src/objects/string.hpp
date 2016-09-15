@@ -22,6 +22,11 @@ namespace ell {
 			return '"' + this->value + '"';
 		}
 
+		virtual std::string str()
+		{
+			return this->value;
+		}
+
 		std::string value;
 		
 		static const std::string TYPE;
