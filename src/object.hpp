@@ -11,6 +11,7 @@
 #include "objects/keyword.hpp"
 #include "objects/symbol.hpp"
 #include "objects/quote.hpp"
+#include "objects/boolean.hpp"
 
 namespace ell {
 

@@ -4,6 +4,9 @@ namespace ell {
 
 	std::map<std::string, BuiltinFunction> builtin_functions = { { "type", &type },
 	                                                             { "str", &str },
+								     { "int", &int_ },
+								     { "float", &float_ },
+								     { "?", &boolean },
 	                                                             { "+", &add },
 	                                                             { "*", &multiply },
 	                                                             { "-", &subtract },
@@ -43,7 +46,57 @@ namespace ell {
 	Object* str(Pair* args)
 	{
 		auto o = get_arg<Object>(args);
+		if (o->type == String::TYPE) {
+			return o;
+		}
 		return make<String>(o->str());
+	}
+
+
+	Object* int_(Pair* args)
+	{
+		auto o = get_arg<Object>(args);
+		if (o->type == Float::TYPE) {
+			return make<Integer>((long)((Float*)o)->value);
+		} else if (o->type == String::TYPE) {
+			try {
+				return make<Integer>(std::stol(((String*)o)->value));
+			} catch (const std::invalid_argument& e) {
+				error("Could not convert argument to %s", Integer::TYPE.c_str());
+				return nullptr;
+			}
+		} else if (o->type == Integer::TYPE) {
+			return o;
+		} else {
+			error("Unable to convert `%s' to %s", o->type.c_str(), Integer::TYPE.c_str());
+			return nullptr;
+		}
+	}
+	
+	Object* float_(Pair* args)
+	{
+		auto o = get_arg<Object>(args);
+		if (o->type == Integer::TYPE) {
+			try {
+				return make<Float>(std::stold(((String*)o)->value));
+			} catch (const std::invalid_argument& e) {
+				error("Could not convert argument to %s", Float::TYPE.c_str());
+				return nullptr;
+			}
+		} else if (o->type == String::TYPE) {
+			return make<Float>(std::stold(((String*)o)->value));
+		} else if (o->type == Float::TYPE) {
+			return o;
+		} else {
+			error("Unable to convert `%s' to %s", o->type.c_str(), Float::TYPE.c_str());
+			return nullptr;
+		}
+	}
+
+	Object* boolean(Pair* args)
+	{
+		auto o = get_arg<Object>(args);
+		return make<Boolean>(o->boolean());
 	}
 
 	/*------------------------------------------------------------

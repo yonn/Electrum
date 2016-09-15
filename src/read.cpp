@@ -135,7 +135,13 @@ namespace ell {
 		} else if (next.tid == TokenIR::Type::Keyword) {
 			o = make<Keyword>(next.token);
 		} else if (next.tid == TokenIR::Type::Symbol) {
-			o = make<Symbol>(next.token);
+			if (next.token == "true") {
+				o = make<Boolean>(true);
+			} else if (next.token == "false") {
+				o = make<Boolean>(false);
+			} else {
+				o = make<Symbol>(next.token);
+			}
 		} else if (next.tid == TokenIR::Type::Quote) {
 			o = make<Quote>(read_impl(fetch()));
 		} else {

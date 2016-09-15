@@ -22,6 +22,15 @@ namespace ell {
 			return std::to_string(value);
 		}
 
+		virtual bool boolean()
+		{
+			if (this->value) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		long value;
 
 		static const std::string TYPE;

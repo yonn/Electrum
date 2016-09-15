@@ -10,6 +10,7 @@ namespace ell {
 	const std::string Pair::TYPE = ELL_CORE_TYPE(Pair);
 	const std::string Keyword::TYPE = ELL_CORE_TYPE(Keyword);
 	const std::string Quote::TYPE = ELL_CORE_TYPE(Quote);
+	const std::string Boolean::TYPE = ELL_CORE_TYPE(Boolean);
 
 	bool is_empty(Pair* p)
 	{

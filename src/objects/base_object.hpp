@@ -28,13 +28,18 @@ namespace ell {
 		virtual std::string repr()
 		{
 			std::ostringstream s;
-			s << "Object[" << (void*)this << "]";
+			s << "<" << this->type << ": " << (void*)this << ">";
 			return s.str();
 		}
 
 		virtual std::string str()
 		{
 			return this->repr();
+		}
+
+		virtual bool boolean()
+		{
+			return true;
 		}
 
 		std::string type;

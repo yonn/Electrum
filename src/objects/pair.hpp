@@ -37,6 +37,15 @@ namespace ell {
 			return s.str();
 		}
 
+		virtual bool boolean()
+		{
+			if (not this->car and not this->cdr) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+
 		Object* car;
 		Object* cdr;
 

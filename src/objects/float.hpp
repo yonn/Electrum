@@ -24,6 +24,15 @@ namespace ell {
 			s << this->value;
 			return s.str();
 		}
+
+		virtual bool boolean()
+		{
+			if (this->value) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 		
 		long double value;
 
