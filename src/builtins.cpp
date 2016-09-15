@@ -3,6 +3,7 @@
 namespace ell {
 
 	std::map<std::string, BuiltinFunction> builtin_functions = { { "type", &type },
+	                                                             { "str", &str },
 	                                                             { "+", &add },
 	                                                             { "*", &multiply },
 	                                                             { "-", &subtract },
@@ -30,6 +31,12 @@ namespace ell {
 	{
 		auto o = get_arg<Object>(args);
 		return make<String>(o->type);
+	}
+
+	Object* str(Pair* args)
+	{
+		auto o = get_arg<Object>(args);
+		return make<String>(str(o));
 	}
 
 	/*------------------------------------------------------------
