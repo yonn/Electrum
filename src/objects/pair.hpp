@@ -22,6 +22,21 @@ namespace ell {
 			return this;
 		}
 
+		virtual std::string repr()
+		{
+			if (not this->car and not this->cdr) {
+				return "nil";
+			}
+			
+			std::ostringstream s;
+			s << "(";
+			ELL_FORLIST(e, this) {
+				s << e->car->repr() << " "; 
+			}
+			s << "\b)";
+			return s.str();
+		}
+
 		Object* car;
 		Object* cdr;
 

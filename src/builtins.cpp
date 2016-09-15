@@ -43,7 +43,7 @@ namespace ell {
 	Object* str(Pair* args)
 	{
 		auto o = get_arg<Object>(args);
-		return make<String>(str(o));
+		return make<String>(o->str());
 	}
 
 	/*------------------------------------------------------------
@@ -413,10 +413,10 @@ namespace ell {
 					s << '\n';
 					break;
 				case 's':
-					s << str(nd_pop_front(args));
+					s << nd_pop_front(args)->str();
 					break;
 				case 'r':
-					s << repr(nd_pop_front(args));
+					s << nd_pop_front(args)->repr();
 					break;
 				default:
 					error("Could not identify format flag `%c'", c);

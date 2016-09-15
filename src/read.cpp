@@ -69,11 +69,6 @@ namespace ell {
 		return TokenIR();
 	}
 
-	static void return_token(TokenIR token)
-	{
-		curr_tokens.push_front(token);
-	}
-
 	Object* read_one(TokenList& tokens)
 	{
 		if (tokens.empty()) {
