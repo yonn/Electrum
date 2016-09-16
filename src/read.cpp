@@ -54,14 +54,14 @@ namespace ell {
 	static Object* read_list();
 	static Object* read_atom(const TokenIR& next);
 
-	static TokenList curr_tokens;
+	static TokenList* curr_tokens;
 	static bool finished;
 	
 	static TokenIR fetch()
 	{
-		if (not curr_tokens.empty()) {
-			auto token = curr_tokens.front();
-			curr_tokens.pop_front();
+		if (not curr_tokens->empty()) {
+			auto token = curr_tokens->front();
+			curr_tokens->pop_front();
 			return token;
 		}
 
@@ -69,9 +69,9 @@ namespace ell {
 		return TokenIR();
 	}
 
-	Object* read_one(TokenList& tokens)
+	Object* read_one(TokenList* tokens)
 	{
-		if (tokens.empty()) {
+		if (tokens->empty()) {
 			return nullptr;
 		} else {
 			curr_tokens = tokens;
@@ -85,13 +85,13 @@ namespace ell {
 		if (line == "") return nullptr;
 
 		auto tokens = tokenize(line, 0);
-		return read_one(tokens);
+		return read_one(&tokens);
 	}
 
 	static Object* read_impl(const TokenIR& next)
 	{
-		error_line_number = next.line_number;
 		if (next.token == "(") {
+			error_line_number = next.line_number;
 			return read_list();
 		} else {
 			return read_atom(next);

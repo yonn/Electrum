@@ -14,6 +14,7 @@
 namespace ell {
 
 	void repl();
+	void execute_file(const std::string& filename);
 
 }
 

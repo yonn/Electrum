@@ -35,4 +35,14 @@ namespace ell {
 		}
 	}
 
+	void execute_file(const std::string& filename)
+	{
+		init_error(filename, ErrorMode::Script);
+		auto tokens = read_file(filename);
+		while (not tokens.empty()) {
+			auto o = read_one(&tokens);
+			if (o) o = eval(o);
+		}
+	}
+
 }
