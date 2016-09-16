@@ -7,6 +7,7 @@ namespace ell {
 								     { "int", &int_ },
 								     { "float", &float_ },
 								     { "?", &boolean },
+								     { "list", &list },
 	                                                             { "+", &add },
 	                                                             { "*", &multiply },
 	                                                             { "-", &subtract },
@@ -96,7 +97,20 @@ namespace ell {
 	Object* boolean(Pair* args)
 	{
 		auto o = get_arg<Object>(args);
+		if (o->type == Boolean::TYPE) {
+			return o;
+		}
 		return make<Boolean>(o->boolean());
+	}
+
+	Object* list(Pair* args)
+	{
+		if (is_not_empty(args)) {
+			ELL_FORLIST(e, args) {
+				e->car = eval(e->car);
+			}
+		}
+		return args;
 	}
 
 	/*------------------------------------------------------------

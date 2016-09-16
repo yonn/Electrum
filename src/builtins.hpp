@@ -35,6 +35,7 @@ namespace ell {
 	Object* int_(Pair* args);
 	Object* float_(Pair* args);
 	Object* boolean(Pair* args);
+	Object* list(Pair* args);
 
 	/*------------------------------------------------------------
 	 *  Arithmetic
