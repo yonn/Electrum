@@ -18,7 +18,7 @@ namespace ell {
 	static bool is_string_token(const std::string& token);
 	static bool is_comment_token(const std::string& token);
 
-	static std::set<char> separators = { '(', ')', '[', ']', '{', '}', '\'' }; 
+	static std::set<char> separators = { '(', ')', '[', ']', '{', '}', '\'', ',', '`', '@' }; 
 
 	const std::string TokenIR::str() const
 	{

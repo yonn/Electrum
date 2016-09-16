@@ -9,6 +9,9 @@ namespace ell {
 								     { "float", &float_ },
 								     { "?", &boolean },
 								     { "list", &list },
+								     { "not", &not_ },
+								     { "or", &or_ },
+								     { "and", &and_ },
 	                                                             { "+", &add },
 	                                                             { "*", &multiply },
 	                                                             { "-", &subtract },
@@ -24,6 +27,13 @@ namespace ell {
 								     { "printf", &printf },
 								     { "printfln", &printfln },
 								     { "format", &format } };
+
+	static void ensure_not_empty(Pair* args)
+	{
+		if (is_empty(args)) {
+			nd_pop_front(args);
+		}
+	}
 
 	/*------------------------------------------------------------
 	 *  Builtin Functions
@@ -130,6 +140,43 @@ namespace ell {
 			}
 		}
 		return args;
+	}
+
+	/*------------------------------------------------------------
+	 *  Logical Operators
+	 *----------------------------------------------------------*/
+
+	Object* not_(Pair* args)
+	{
+		auto o = get_arg<Object>(args);
+		return make<Boolean>(not o->boolean());
+	}
+
+	Object* or_(Pair* args)
+	{
+		ensure_not_empty(args);
+		Object* o;
+		while (is_not_empty(args)) {
+			o = get_arg<Object>(args);
+			if (o->boolean()) {
+				return o;
+			}
+		}
+		return o;
+	}
+
+
+	Object* and_(Pair* args)
+	{
+		ensure_not_empty(args);
+		Object* o;
+		while (is_not_empty(args)) {
+			o = get_arg<Object>(args);
+			if (not o->boolean()) {
+				return o;
+			}
+		}
+		return o;	
 	}
 
 	/*------------------------------------------------------------

@@ -44,8 +44,17 @@ namespace ell {
 	Object* list(Pair* args);
 
 	/*------------------------------------------------------------
+	 *  Logical Operators
+	 *----------------------------------------------------------*/
+
+	Object* not_(Pair* args);
+	Object* or_(Pair* args);
+	Object* and_(Pair* args);
+
+	/*------------------------------------------------------------
 	 *  Arithmetic
 	 *----------------------------------------------------------*/
+
 
 	Object* add(Pair* args);
 	Object* multiply(Pair* args);
