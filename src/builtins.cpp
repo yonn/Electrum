@@ -3,6 +3,7 @@
 namespace ell {
 
 	std::map<std::string, BuiltinFunction> builtin_functions = { { "type", &type },
+	                                                             { "if", &if_ },
 	                                                             { "str", &str },
 								     { "int", &int_ },
 								     { "float", &float_ },
@@ -38,6 +39,24 @@ namespace ell {
 	{
 		auto o = get_arg<Object>(args);
 		return make<String>(o->type);
+	}
+
+	/*------------------------------------------------------------
+	 *  Flow Control
+	 *----------------------------------------------------------*/
+
+	Object* if_(Pair* args)
+	{
+		if (get_arg<Object>(args)->boolean()) {
+			return get_arg<Object>(args);
+		} else {
+			nd_pop_front(args);
+			if (is_empty(args)) {
+				return args;
+			} else {
+				return get_arg<Object>(args);
+			}
+		}
 	}
 
 	/*------------------------------------------------------------
