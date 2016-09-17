@@ -5,6 +5,7 @@ D_LFLAGS = -Wall -Wextra -std=c++14 $(DEBUG)
 
 OBJS = bin/electrum.o \
        bin/builtins.o \
+       bin/state.o    \
        bin/eval.o     \
        bin/read.o     \
        bin/object.o   \
@@ -21,6 +22,9 @@ bin/electrum.o: src/electrum.cpp src/electrum.hpp src/read.hpp src/error.hpp
 
 bin/builtins.o: src/builtins.cpp src/builtins.hpp src/eval.hpp src/object.hpp src/error.hpp
 	$(CC) $(D_CFLAGS) src/builtins.cpp -o bin/builtins.o
+
+bin/state.o: src/state.cpp src/state.hpp src/object.hpp src/error.hpp
+	$(CC) $(D_CFLAGS) src/state.cpp -o bin/state.o
 
 bin/eval.o: src/eval.cpp src/eval.hpp src/object.hpp src/error.hpp
 	$(CC) $(D_CFLAGS) src/eval.cpp -o bin/eval.o
