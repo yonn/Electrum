@@ -7,11 +7,14 @@
 #include <iostream>
 #include <sstream>
 
+#include "state.hpp"
 #include "eval.hpp"
 #include "object.hpp"
 #include "error.hpp"
 
 namespace ell {
+
+	extern thread_local State* state;
 
 	using BuiltinFunction = Object* (*)(Pair*);
 	extern std::map<std::string, BuiltinFunction> builtin_functions;
@@ -26,6 +29,8 @@ namespace ell {
 	 *----------------------------------------------------------*/
 
 	Object* type(Pair* args);
+	Object* defvar(Pair* args);
+	Object* set(Pair* args);
 	
 	/*------------------------------------------------------------
 	 *  Flow Control

@@ -12,6 +12,12 @@ namespace ell {
 		} else if (o->type == Quote::TYPE) {
 			return ((Quote*)o)->o;
 		} else {
+			if (o->type == Symbol::TYPE) {
+				std::string name = type_check<Symbol>(o)->symbol;
+				if (state->exists_variable(name)) {
+					return state->get_variable(name);
+				}
+			}
 			return o;
 		}
 	}

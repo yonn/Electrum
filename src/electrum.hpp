@@ -7,6 +7,8 @@
 #include "lexer.hpp"
 #include "read.hpp"
 #include "eval.hpp"
+#include "object.hpp"
+#include "state.hpp"
 #include "error.hpp"
 
 #define ever (;;)

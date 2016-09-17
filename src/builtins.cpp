@@ -2,7 +2,11 @@
 
 namespace ell {
 
+	thread_local State* state;
+
 	std::map<std::string, BuiltinFunction> builtin_functions = { { "type", &type },
+	                                                             { "defvar", &defvar },
+	                                                             { "set", &set },
 	                                                             { "if", &if_ },
 	                                                             { "str", &str },
 								     { "int", &int_ },
@@ -51,6 +55,27 @@ namespace ell {
 		return make<String>(o->type);
 	}
 
+	Object* defvar(Pair* args)
+	{
+		auto name = get_raw_arg<Symbol>(args);
+		auto o = get_arg<Object>(args);
+		state->make_global(name->symbol, o);
+		return o;
+	}
+
+	Object* set(Pair* args)
+	{
+		auto name = get_raw_arg<Symbol>(args)->symbol;
+		if (state->exists_variable(name)) {
+			auto o = get_arg<Object>(args);
+			state->set_variable(name, o);
+			return o;
+		} else {
+			error("Can't find variable `%s'", name.c_str());
+			return nullptr;
+		}
+	}
+	
 	/*------------------------------------------------------------
 	 *  Flow Control
 	 *----------------------------------------------------------*/

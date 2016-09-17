@@ -6,6 +6,8 @@ namespace ell {
 	{
 		init_error("stdin", ErrorMode::REPL);
 		int index = -1;
+
+		state = new State();
 		
 		for ever {
 			try {
@@ -33,16 +35,20 @@ namespace ell {
 				//gc();
 			} catch (ErrorException& e) { }
 		}
+
+		delete state;
 	}
 
 	void execute_file(const std::string& filename)
 	{
 		init_error(filename, ErrorMode::Script);
 		auto tokens = read_file(filename);
+		state = new State();
 		while (not tokens.empty()) {
 			auto o = read_one(&tokens);
 			if (o) o = eval(o);
 		}
+		delete state;
 	}
 
 }

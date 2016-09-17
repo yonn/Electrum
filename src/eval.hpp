@@ -3,6 +3,7 @@
 
 #include "object.hpp"
 #include "builtins.hpp"
+#include "state.hpp"
 #include "error.hpp"
 
 namespace ell {
