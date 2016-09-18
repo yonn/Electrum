@@ -20,13 +20,13 @@ electrum: src/main.cpp $(OBJS)
 bin/electrum.o: src/electrum.cpp src/electrum.hpp src/read.hpp src/error.hpp
 	$(CC) $(D_CFLAGS) src/electrum.cpp -o bin/electrum.o
 
-bin/builtins.o: src/builtins.cpp src/builtins.hpp src/eval.hpp src/object.hpp src/error.hpp
+bin/builtins.o: src/builtins.cpp src/state.hpp src/builtins.hpp src/eval.hpp src/object.hpp src/error.hpp
 	$(CC) $(D_CFLAGS) src/builtins.cpp -o bin/builtins.o
 
 bin/state.o: src/state.cpp src/state.hpp src/object.hpp src/error.hpp
 	$(CC) $(D_CFLAGS) src/state.cpp -o bin/state.o
 
-bin/eval.o: src/eval.cpp src/eval.hpp src/object.hpp src/error.hpp
+bin/eval.o: src/eval.cpp src/eval.hpp src/state.hpp src/object.hpp src/error.hpp
 	$(CC) $(D_CFLAGS) src/eval.cpp -o bin/eval.o
 
 bin/read.o: src/read.cpp src/read.hpp src/object.hpp src/lexer.hpp src/error.hpp

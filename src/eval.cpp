@@ -16,6 +16,11 @@ namespace ell {
 				std::string name = type_check<Symbol>(o)->symbol;
 				if (state->exists_variable(name)) {
 					return state->get_variable(name);
+				} else if (builtin_functions.count(name) == 1) {
+					return o;
+				} else {
+					error("Unknown identifier `%s'", name.c_str());
+					return nullptr;
 				}
 			}
 			return o;

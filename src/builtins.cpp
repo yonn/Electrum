@@ -593,10 +593,10 @@ namespace ell {
 					s << '\n';
 					break;
 				case 's':
-					s << nd_pop_front(args)->str();
+					s << get_arg<Object>(args)->str();
 					break;
 				case 'r':
-					s << nd_pop_front(args)->repr();
+					s << get_arg<Object>(args)->repr();
 					break;
 				default:
 					error("Could not identify format flag `%c'", c);
