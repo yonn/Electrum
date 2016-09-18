@@ -30,6 +30,7 @@ namespace ell {
 
 	Object* type(Pair* args);
 	Object* defvar(Pair* args);
+	Object* let(Pair* args);
 	Object* set(Pair* args);
 	
 	/*------------------------------------------------------------

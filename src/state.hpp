@@ -16,7 +16,13 @@ namespace ell {
 	class State {
 	public:
 
+		State();
+
 		void make_global(std::string name, Object* val);
+		void make_local(std::string name, Object* val);
+
+		void push_local_scope();
+		void pop_local_scope();
 
 		bool exists_variable(std::string name);
 
@@ -26,6 +32,7 @@ namespace ell {
 	private:
 
 		GlobalState globals;
+		std::deque<LocalState> locals;
 		
 	};
 

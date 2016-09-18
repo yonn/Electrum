@@ -6,6 +6,7 @@ namespace ell {
 
 	std::map<std::string, BuiltinFunction> builtin_functions = { { "type", &type },
 	                                                             { "defvar", &defvar },
+	                                                             { "let", &let },
 	                                                             { "set", &set },
 	                                                             { "if", &if_ },
 	                                                             { "str", &str },
@@ -61,6 +62,27 @@ namespace ell {
 		auto o = get_arg<Object>(args);
 		state->make_global(name->symbol, o);
 		return o;
+	}
+
+	Object* let(Pair* args)
+	{
+		auto bindings = get_raw_arg<Pair>(args);
+		state->push_local_scope();
+		while (is_not_empty(bindings)) {
+			auto pair = get_raw_arg<Pair>(bindings);
+			auto name = get_raw_arg<Symbol>(pair)->symbol;
+			auto o = get_arg<Object>(pair);
+			state->make_local(name, o);
+		}
+		
+		Object* res = nullptr;
+		while (is_not_empty(args)) {
+			res = get_arg<Object>(args);
+		}
+		
+		state->pop_local_scope();
+		
+		return (res? res : ELL_NEW_NIL);
 	}
 
 	Object* set(Pair* args)
