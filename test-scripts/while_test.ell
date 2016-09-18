@@ -1,0 +1,5 @@
+(defvar x 10)
+
+(while x
+  (printf "~s " x)
+  (set x (- x 1)))

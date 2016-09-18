@@ -9,6 +9,7 @@ namespace ell {
 	                                                             { "let", &let },
 	                                                             { "set", &set },
 	                                                             { "if", &if_ },
+	                                                             { "while", &while_ },
 	                                                             { "str", &str },
 								     { "int", &int_ },
 								     { "float", &float_ },
@@ -114,6 +115,20 @@ namespace ell {
 				return get_arg<Object>(args);
 			}
 		}
+	}
+
+	Object* while_(Pair* args)
+	{
+		auto pred = get_raw_arg<Object>(args);
+		auto exprs = args;
+		Object* res = nullptr;
+		while (eval(pred)->boolean()) {
+			while (is_not_empty(exprs)) {
+				res = get_arg<Object>(exprs);
+			}
+			exprs = args;
+		}
+		return (res? res : ELL_NEW_NIL);
 	}
 
 	/*------------------------------------------------------------
