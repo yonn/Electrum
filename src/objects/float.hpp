@@ -33,6 +33,24 @@ namespace ell {
 				return false;
 			}
 		}
+
+		virtual bool equals(Object* o)
+		{
+			if (this->type != o->type) {
+				return false;
+			}
+			return (((Float*)o)->value == this->value);
+		}
+
+		virtual bool is_a_number()
+		{
+			return true;
+		}
+
+		virtual long double number()
+		{
+			return this->value;
+		}
 		
 		long double value;
 

@@ -36,6 +36,14 @@ namespace ell {
 			}
 		}
 
+		virtual bool equals(Object* o)
+		{
+			if (this->type != o->type) {
+				return false;
+			}
+			return (this->value == o->str());
+		}
+
 		std::string value;
 		
 		static const std::string TYPE;

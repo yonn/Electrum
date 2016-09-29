@@ -42,6 +42,22 @@ namespace ell {
 			return true;
 		}
 
+		virtual bool is_a_number()
+		{
+			return false;
+		}
+
+		virtual long double number()
+		{
+			error("Type `%s' is not a number.", this->type.c_str());
+			return 0.0;
+		}
+
+		virtual bool equals(Object* o)
+		{
+			return (this == o);
+		}
+
 		std::string type;
 
 		static const std::string TYPE;

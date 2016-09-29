@@ -31,6 +31,24 @@ namespace ell {
 			}
 		}
 
+		virtual bool equals(Object* o)
+		{
+			if (this->type != o->type) {
+				return false;
+			}
+			return (((Integer*)o)->value == this->value);
+		}
+
+		virtual bool is_a_number()
+		{
+			return true;
+		}
+
+		virtual long double number()
+		{
+			return (long double)this->value;
+		}
+
 		long value;
 
 		static const std::string TYPE;

@@ -18,6 +18,7 @@ namespace ell {
 								     { "not", &not_ },
 								     { "or", &or_ },
 								     { "and", &and_ },
+	                                                             { "=", &equals },
 	                                                             { "+", &add },
 	                                                             { "*", &multiply },
 	                                                             { "-", &subtract },
@@ -239,6 +240,23 @@ namespace ell {
 			}
 		}
 		return o;	
+	}
+
+	/*------------------------------------------------------------
+	 *  Comparison
+	 *----------------------------------------------------------*/
+
+	Object* equals(Pair* args)
+	{
+		auto l = get_arg<Object>(args);
+		auto r = get_arg<Object>(args);
+		if (l->type == r->type) {
+			return make<Boolean>(l->equals(r));
+		} else if (l->is_a_number() and r->is_a_number()) {
+			return make<Boolean>(l->number() == r->number());
+		} else {
+			return make<Boolean>(false);
+		}
 	}
 
 	/*------------------------------------------------------------
