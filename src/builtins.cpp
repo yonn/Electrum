@@ -249,14 +249,21 @@ namespace ell {
 	Object* equals(Pair* args)
 	{
 		auto l = get_arg<Object>(args);
-		auto r = get_arg<Object>(args);
-		if (l->type == r->type) {
-			return make<Boolean>(l->equals(r));
-		} else if (l->is_a_number() and r->is_a_number()) {
-			return make<Boolean>(l->number() == r->number());
-		} else {
-			return make<Boolean>(false);
-		}
+		bool res = false;
+		do {
+			auto r = get_arg<Object>(args);
+			if (l->type == r->type) {
+				res = l->equals(r);
+				if (not res) break;
+			} else if (l->is_a_number() and r->is_a_number()) {
+				res = (l->number() == r->number());
+				if (not res) break;
+			} else {
+				res = false;
+				break;
+			}
+		} while (is_not_empty(args));
+		return make<Boolean>(res);
 	}
 
 	/*------------------------------------------------------------
